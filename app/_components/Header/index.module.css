@@ -7,12 +7,14 @@
     justify-content: space-between;
     width: 100%;
 }
+
 .logoLink {
     display: flex;
 }
+
 .logo {
     height: 24px;
-    width: auto;;
+    width: auto;
 }
 
 .items {
@@ -21,7 +23,7 @@
     gap: 40px;
 }
 
-@media (max-width:640px) {
+@media (max-width: 640px) {
     .header {
         padding: 24px 16px 8px;
     }

@@ -47,6 +47,13 @@
   font-size: 1.5rem;
 }
 
+
+@media (max-width: 1000px) {
+    .news {
+        width: calc(100% - 160px);
+    }
+}
+
 .newsLink {
   position: absolute;
   right: -40px;
@@ -93,13 +100,3 @@
     margin-top: 16px;
   }
 }
-
-
-
-
-
-
-
-
-
-
