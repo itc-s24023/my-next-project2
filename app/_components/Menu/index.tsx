@@ -1,31 +1,44 @@
 "use client";
 
 import Link from "next/link";
+import styles from "./index.module.css";
 import Image from "next/image";
 import { useState } from "react";
 import cx from "./cx.js";
-import styles from "./index.module.css";
+// cxがなかったので作成と追加
+
 
 export default function Menu() {
     const [isOpen, setOpen] = useState<boolean>(false);
     const open = () => setOpen(true);
-     return (
+    const close = () => setOpen(false);
+    return (
         <div>
-      <nav className={cx(styles.nav, isOpen && styles.open)}>
-        <ul className={styles.items}>
-          <li>
-            <Link href="/news">ニュース</Link>
-          </li>
-          <li>
-            <Link href="/members">メンバー</Link>
-          </li>
-          <li>
-            <Link href="/contact">お問い合わせ</Link>
-          </li>
-        </ul>
-        </nav>
-          <button className={styles.button} onClick={open}>
-            <Image src="/menu.svg" alt="メニュー" width={24} height={24} />
+            {/* &&の仕様 trueの場合に戻り値が右になる https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Logical_AND#%E4%BE%8B */}
+            <nav className={cx(styles.nav, isOpen && styles.open)}>
+                <ul className={styles.items}>
+                    <li>
+                        <Link href="/news">ニュース</Link>
+                    </li>
+                    <li>
+                        <Link href="/members">メンバー</Link>
+                    </li>
+                    <li>
+                        <Link href="/contact">お問い合わせ</Link>
+                    </li>
+                </ul>
+                <button id="close" className={cx(styles.button, styles.close)} onClick={close}>
+                    <Image
+                        src="/close.svg"
+                        alt="閉じる"
+                        width={24}
+                        height={24}
+                        priority
+                    />
+                </button>
+            </nav>
+            <button className={styles.button} onClick={open}>
+                <Image src="./menu.svg" alt="メニュー" width={24} height={24} />
             </button>
         </div>
     );

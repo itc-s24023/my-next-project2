@@ -4,16 +4,14 @@ import type {
   MicroCMSImage,
   MicroCMSListContent,
 } from "microcms-js-sdk";
-
 export type Member = {
   name: string;
   position: string;
   profile: string;
   image: MicroCMSImage;
 } & MicroCMSListContent;
-
 export type Category = {
-  name: string;
+    name: string;
 } & MicroCMSListContent;
 
 export type News = {
@@ -37,6 +35,7 @@ const client = createClient({
   apiKey: process.env.MICROCMS_API_KEY,
 });
 
+
 export const getMembersList = async (queries?: MicroCMSQueries) => {
   const listData = await client.getList<Member>({
     endpoint: "members",
@@ -46,34 +45,37 @@ export const getMembersList = async (queries?: MicroCMSQueries) => {
 };
 
 export const getNewsList = async (queries?: MicroCMSQueries) => {
-  const listData = await client.getList<News>({
-    endpoint: "news",
-    queries,
-  });
-  return listData;
+    const listData = await client.getList<News>({
+        endpoint: "news",
+        queries,
+    });
+    return listData;
 };
 
 export const getNewsDetail = async (
-  contentId: string,
-  queries?: MicroCMSQueries
+    contentId: string,
+    queries?:MicroCMSQueries
 ) => {
-  const detailData = await client.getListDetail<News>({
-    endpoint: "news",
-    contentId,
-    queries,
-  });
+    const detailData = await client.getListDetail<News>({
+        endpoint: "news",
+        contentId,
+        queries,
 
-  return detailData;
-};
-export const getCategoryDetail = async (
-  contentId: string,
-  queries?: MicroCMSQueries
-) => {
-  const detailData = await client.getListDetail<Category>({
-    endpoint: "categories",
-    contentId,
-    queries,
-  });
+        customRequestInit: {
+            next: {
+                revalidate: queries?.draftKey === undefined ? 60 : 0
+            }
+        }
+    });
+    return detailData
+}
 
-  return detailData;
-};
+
+export const getCategoryDetail = async ( contentId: string, queries?: MicroCMSQueries) => {
+    const detailData = await client.getListDetail<Category>({
+        endpoint: "categories",
+        contentId,
+        queries,
+    });
+    return detailData;
+}
