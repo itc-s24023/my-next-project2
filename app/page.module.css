@@ -8,7 +8,6 @@
   overflow: hidden;
   padding: 200px 0;
 }
-
 .title {
   font-size: 3rem;
   font-weight: bold;
@@ -23,7 +22,7 @@
 .bgimg {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   width: 100%;
   height: 600px;
   object-fit: cover;
@@ -47,13 +46,6 @@
   font-size: 1.5rem;
 }
 
-
-@media (max-width: 1000px) {
-    .news {
-        width: calc(100% - 160px);
-    }
-}
-
 .newsLink {
   position: absolute;
   right: -40px;
@@ -68,13 +60,10 @@
     font-size: 2rem;
     text-align: left;
   }
-
   .description {
-    text-align: center;
     font-size: 0.9rem;
     text-align: left;
   }
-
   .bgimg {
     position: absolute;
     top: 0;
